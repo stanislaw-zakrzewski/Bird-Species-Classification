@@ -4,6 +4,7 @@
 # Dataset
 2-bird-species/*
 100-bird-species/*
+saved_model_binary_classifier/*
 
 # User-specific stuff
 .idea/**/workspace.xml

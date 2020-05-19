@@ -1,7 +1,7 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
-def create_training_data_generators(train_dir, validation_dir, batch_size=128, image_dimensions=(150, 150)):
+def create_training_data_generators(train_dir, validation_dir, test_dir, batch_size=128, image_dimensions=(150, 150)):
     train_image_generator = ImageDataGenerator(
         rescale=1. / 255,
         rotation_range=45,
@@ -21,4 +21,10 @@ def create_training_data_generators(train_dir, validation_dir, batch_size=128, i
                                                                          target_size=image_dimensions,
                                                                          class_mode='binary')
 
-    return train_data_gen, validation_data_gen
+    test_image_generator = ImageDataGenerator(rescale=1. / 255)
+    test_data_gen = test_image_generator.flow_from_directory(batch_size=batch_size,
+                                                             directory=test_dir,
+                                                             target_size=image_dimensions,
+                                                             class_mode='binary')
+
+    return train_data_gen, validation_data_gen, test_data_gen
